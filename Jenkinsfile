@@ -1,7 +1,11 @@
 @Library('github.com/triologygmbh/jenkinsfile@f38945a') _
 
 pipeline {
-    agent { label 'docker' } // Require a build executor with docker
+     
+    agent { docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        } } // Require a build executor with docker
 
     options {
         disableConcurrentBuilds()
